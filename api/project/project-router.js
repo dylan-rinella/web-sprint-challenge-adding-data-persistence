@@ -24,4 +24,34 @@ router.get('/:id', (req, res) => {
     });
 })
 
+router.post('/', (req, res) => {
+  projects.insert(req.body)
+    .then(project => {
+      res.json(project)
+    })
+    .catch(err => {
+      res.status(500).json({ message: `${err}` });
+    });
+})
+
+router.put('/:id', (req, res) => {
+  projects.update(req.params, req.body)
+    .then(project => {
+      res.json(project)
+    })
+    .catch(err => {
+      res.status(500).json({ message: `${err}` });
+    });
+})
+
+router.delete('/:id', (req, res) => {
+  projects.remove(req.params)
+    .then(project => {
+      res.json(project)
+    })
+    .catch(err => {
+      res.status(500).json({ message: `${err}` });
+    });
+})
+
 module.exports = router
